@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+
+    <h:head>
+        <title>Curso jsf</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="formpesoa">
+
+            <h1>OLÁ JSF</h1>
+
+            <h:outputText value="ID: "/>
+            <h:inputText value="#{pessoaBean.pessoa.id}" readonly="true"/>
+            <br/>
+
+            <h:outputText value="Nome: "/>
+            <h:inputText value="#{pessoaBean.pessoa.nome}"/>
+
+            <br/>
+            <h:outputText value="Sobrenome: "/>
+            <h:inputText value="#{pessoaBean.pessoa.sobrenome}"/>
+            <br/>
+
+            <h:outputText value="Idade: "/>
+            <h:inputText value="#{pessoaBean.pessoa.idade}"/>
+
+            <br/>
+
+            <h:commandButton value="Salvar" action="#{pessoaBean.salvar}"/>
+            <h:commandButton value="Novo" action="#{pessoaBean.novo}"/>
+            <h:commandButton value="Excluir" action="#{pessoaBean.excluir}"/>
+
+            <h:dataTable value="#{pessoaBean.pessoas}" var="pessoa">
+
+                <h:column>
+                    <h:outputText value="#{pessoa.id}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{pessoa.nome}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{pessoa.sobrenome}"/>
+                </h:column>
+                <h:column>
+                    <h:outputText value="#{pessoa.idade}"/>
+                </h:column>
+
+                <h:column>
+                    <h:commandLink value="Editar">
+                        <f:setPropertyActionListener value="#{pessoaBean.pessoa}" target="#{pessoa}" />
+                    </h:commandLink>
+                </h:column>
+
+                <h:column>
+                    <h:commandLink value="Excluir" action="#{pessoaBean.excluir}">
+                        <f:setPropertyActionListener value="#{pessoaBean.pessoa}" target="#{pessoa}" />
+                    </h:commandLink>
+                </h:column>
+
+            </h:dataTable>
+
+        </h:form>
+    </h:body>
+
+</html>
