@@ -1,14 +1,15 @@
-package dao;
+package br.com.dao;
 
+import br.com.entidades.Lancamento;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jpautil.JPAUtil;
+import br.com.jpautil.JPAUtil;
 
 import java.util.List;
 
 public class DaoGeneric<OB> { //OB = objeto
 
-    public void salvar(OB obj) {
+    public void salvar(Lancamento obj) {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
@@ -33,6 +34,8 @@ public class DaoGeneric<OB> { //OB = objeto
         return retorno;
     }
 
+
+
     public void excluir(OB obj) {
         EntityManager entityManager = JPAUtil.getEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
@@ -51,7 +54,7 @@ public class DaoGeneric<OB> { //OB = objeto
         transaction.begin();
 
         Object id = JPAUtil.getPrimaryKey(obj);
-        entityManager.createQuery(" delete from " + obj.getClass().getCanonicalName() + " where id = " + id).executeUpdate();
+        entityManager.createQuery(" delete from " + obj.getClass().getCanonicalName() + " where id =  " + id).executeUpdate();
 
         transaction.commit();
         entityManager.close();
@@ -63,6 +66,18 @@ public class DaoGeneric<OB> { //OB = objeto
         EntityTransaction transaction = entityManager.getTransaction();
 
         List<OB> retorno = entityManager.createQuery(" from " + obj.getName()).getResultList();
+
+        transaction.begin();
+        entityManager.close();
+
+        return retorno;
+    }
+
+    public List<Lancamento> getListEntityLancamento(Class<Lancamento> obj) {
+        EntityManager entityManager = JPAUtil.getEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        List<Lancamento> retorno = entityManager.createQuery(" from " + obj.getName()).getResultList();
 
         transaction.begin();
         entityManager.close();

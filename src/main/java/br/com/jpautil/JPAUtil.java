@@ -1,4 +1,4 @@
-package jpautil;
+package br.com.jpautil;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;

@@ -1,18 +1,18 @@
 package br.com.cursojsf.demo;
 
 
-import dao.DaoGeneric;
-import entidades.Pessoa;
+import br.com.dao.DaoGeneric;
+import br.com.entidades.Pessoa;
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-import jakarta.persistence.ManyToOne;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import br.com.repository.*;
 
 @Named("pessoaBean")
 @ViewScoped
@@ -25,6 +25,7 @@ import java.util.List;
     private Pessoa pessoa = new Pessoa();
     private  DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
     private List<Pessoa> pessoas = new ArrayList<Pessoa>();
+    private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -46,6 +47,30 @@ import java.util.List;
         this.pessoas = pessoas;
     }
 
+    public String logar(){
+
+        Pessoa pessoaUser = iDaoPessoa.consultarUsuario(pessoa.getLogin(), pessoa.getSenha());
+
+        if(pessoa != null){ // achou o usuário
+
+            //adicionar usuario na sessão usuarioLogado
+            FacesContext context = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = context.getExternalContext();
+            externalContext.getSessionMap().put("pessoaUser", pessoaUser);
+
+           return "paginanavegacao.jsf";
+        }
+
+        return "index.xhtml";
+    }
+
+    public Boolean permiteAcesso(String acesso){
+        FacesContext context = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = context.getExternalContext();
+        Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("pessoaUser");
+
+        return pessoaUser.getPerfilUser().equals(acesso);
+    }
 
     public PessoaBean(){
 
@@ -78,5 +103,6 @@ import java.util.List;
         pessoas = daoGeneric.getListEntity(Pessoa.class);
     }
 
-
 }
+
+
