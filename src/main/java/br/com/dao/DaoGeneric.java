@@ -1,9 +1,9 @@
 package br.com.dao;
 
 import br.com.entidades.Lancamento;
+import br.com.jpautil.JPAUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import br.com.jpautil.JPAUtil;
 
 import java.util.List;
 
@@ -33,7 +33,6 @@ public class DaoGeneric<OB> { //OB = objeto
 
         return retorno;
     }
-
 
 
     public void excluir(OB obj) {

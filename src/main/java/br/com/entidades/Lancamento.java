@@ -41,16 +41,16 @@ public class Lancamento implements Serializable {
         return empresaOrigem;
     }
 
+    public void setEmpresaOrigem(String empresaOrigem) {
+        this.empresaOrigem = empresaOrigem;
+    }
+
     public String getEmpresaDestino() {
         return empresaDestino;
     }
 
     public void setEmpresaDestino(String empresaDestino) {
         this.empresaDestino = empresaDestino;
-    }
-
-    public void setEmpresaOrigem(String empresaOrigem) {
-        this.empresaOrigem = empresaOrigem;
     }
 
     public Pessoa getUsuario() {

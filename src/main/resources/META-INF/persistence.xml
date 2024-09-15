@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
 
-  <persistence-unit name="curso-jsf">
-    <class>br.com.entidades.Pessoa</class>
-    <class>br.com.entidades.Lancamento</class>
+    <persistence-unit name="curso-jsf">
+        <class>br.com.entidades.Pessoa</class>
+        <class>br.com.entidades.Lancamento</class>
+        <class>br.com.entidades.Estados</class>
+        <class>br.com.entidades.Cidades</class>
 
-    <properties>
-    <!-- Dados de conexão com o banco  -->
-    <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-    <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/curso-jsf"/>
-    <property name="hibernate.connection.username" value="postgres"/>
-    <property name="hibernate.connection.password" value="admin"/>
-    <property name="hibernate.format_sql" value="true"/>
-    <property name="hibernate.hbm2ddl.auto" value="update"/>
+        <properties>
+            <!-- Dados de conexão com o banco  -->
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/curso-jsf"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="admin"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.connection.pool_size" value="20"/>
 
-    </properties>
 
-  </persistence-unit>
+        </properties>
+
+    </persistence-unit>
 </persistence>
